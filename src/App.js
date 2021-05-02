@@ -8,14 +8,17 @@ function App() {
   const [forecastInfo, setForecastInfo] = useState([]);
 
   async function fetchForecastHandler(e) {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${e.city},${e.country}&units=imperial&appid=2c3448653d26657e8f7d970848003330`)
-    const data = await response.json();
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${e.city},${e.country}&units=imperial&appid=2c3448653d26657e8f7d970848003330`)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    let data = await response.json();
 
     console.log(data);
   }
   return (
-    <div className={styles.App}>
-      <Card className={styles.Forecast}>
+    <div className={styles.app}>
+      <Card className={styles.forecast}>
         <SearchForm onFetchForecast={fetchForecastHandler} />
         <ForecastList  />
       </Card>
