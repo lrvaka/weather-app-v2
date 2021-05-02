@@ -1,0 +1,18 @@
+.App {
+  background-color: #a6a651;
+  background-image: linear-gradient(0deg, #a6a651 0%, #06607f 100%);
+  height: 100vh;
+  width: 100vw;
+  color: white;
+   overflow: auto;
+}
+
+.Forecast {
+  padding: 30px 10px;
+  margin: 0px 10px;
+  max-width: 1100px;
+  background-color: rgb(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
