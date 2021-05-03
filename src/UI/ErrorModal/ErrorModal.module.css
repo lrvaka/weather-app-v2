@@ -9,6 +9,7 @@
   }
 
   .modal {
+    text-align: center;
     position: fixed;
     top: 30vh;
     left: 10%;
