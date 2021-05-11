@@ -5,10 +5,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 250px;
+    width: clamp(65px, 20vw, 150px)
 }
 
 .forecastListItem img {
-    width: 90px;
-    height: 90px;
+    width: clamp(65px, 10vw, 100px)
+}
+
+.forecastListItem h5 {
+    font-size: clamp(2px, 5vw, 10px);
 }

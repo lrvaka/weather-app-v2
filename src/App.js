@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import Card from "./UI/Card/Card";
 import SearchForm from "./components/SearchForm/SearchForm";
@@ -6,6 +6,121 @@ import ForecastList from "./components/ForecastList/ForecastList";
 
 function App() {
   const [forecastInfo, setForecastInfo] = useState([]);
+  const [todaysForecast, setTodaysForecast] = useState([]);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      console.log(navigator.geolocation);
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      setForecastInfo("Geolocation is not supported by this browser.");
+    }
+
+    async function showPosition(position) {
+      let response = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial&appid=2c3448653d26657e8f7d970848003330`
+      );
+      if (!response.ok) {
+        //Location not found function here, probably gonna pass to a modal inside ForecastList component
+        return;
+      }
+      let data = await response.json();
+
+      let responseToday = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial&appid=2c3448653d26657e8f7d970848003330`
+      );
+      if (!responseToday.ok) {
+        //Location not found function here, probably gonna pass to a modal inside ForecastList component
+        return;
+      }
+      let dataToday = await responseToday.json();
+
+      console.log(dataToday);
+
+      let filteredWeather = data.list.map((e) => {
+        return {
+          date: e.dt_txt.substring(0, 10),
+          time: e.dt_txt.substring(11, 19),
+          temp_max: e.main.temp_max,
+          temp_min: e.main.temp_min,
+          description: e.weather[0].description,
+          icon: e.weather[0].icon,
+        };
+      });
+
+      let tempDay = new Date();
+        tempDay.setDate(tempDay.getDate());
+        tempDay = tempDay.toISOString();
+        tempDay = tempDay.substring(0, 10);
+
+      let forecastToday = {
+        temp: dataToday.main.temp,
+        max: dataToday.main.temp_max,
+        min: dataToday.main.temp_min,
+        date: tempDay,
+        feels_like: dataToday.main.feels_like,
+        description: dataToday.weather[0].description,
+        icon: dataToday.weather[0].icon,
+      };
+  
+      setTodaysForecast((prevState) => {
+        return [
+          ...prevState,
+          forecastToday
+        ];
+      });
+
+      const filteredFinal = [];
+
+      for (let i = 1; i <= 4; i++) {
+        // Only pulling out a 3-day forecast because the info
+        let tempDay = new Date();
+        tempDay.setDate(tempDay.getDate() + i);
+        tempDay = tempDay.toISOString();
+        tempDay = tempDay.substring(0, 10);
+
+        filteredFinal.push({
+          date: tempDay,
+          max: Math.max(
+            ...filteredWeather
+              .filter((element) => {
+                return element.date === tempDay;
+              })
+              .map((element) => {
+                return element.temp_max;
+              })
+          ),
+          min: Math.min(
+            ...filteredWeather
+              .filter((element) => {
+                return element.date === tempDay;
+              })
+              .map((element) => {
+                return element.temp_min;
+              })
+          ),
+          description: filteredWeather
+            .filter((element) => {
+              return element.date === tempDay;
+            })
+            .filter((element) => {
+              return element.time === "12:00:00";
+            })[0].description,
+          icon: filteredWeather
+            .filter((element) => {
+              return element.date === tempDay;
+            })
+            .filter((element) => {
+              return element.time === "12:00:00";
+            })[0].icon,
+          city: data.city.name,
+          country: data.city.country,
+        });
+      }
+
+      setForecastInfo(filteredFinal);
+    }
+  }, []);
 
   async function fetchForecastHandler(e) {
     let response = await fetch(
@@ -32,7 +147,7 @@ function App() {
 
     const filteredFinal = [];
 
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 4; i++) {
       // Only pulling out a 3-day forecast because the info
       let tempDay = new Date();
       tempDay.setDate(tempDay.getDate() + i);
@@ -88,6 +203,7 @@ function App() {
         <SearchForm onFetchForecast={fetchForecastHandler} />
         <ForecastList
           forecastInfo={forecastInfo}
+          todaysForecast={todaysForecast}
         />
       </Card>
     </div>
