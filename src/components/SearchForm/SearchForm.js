@@ -4,8 +4,9 @@ import styles from "./SearchForm.module.css";
 import Card from "../../UI/Card/Card";
 import ErrorModal from "../../UI/ErrorModal/ErrorModal";
 import searchIcon from "../../assets/magnifying-glass.png";
+import locationIcon from "../../assets/location.png";
 
-export default function SearchForm({ onFetchForecast }) {
+export default function SearchForm({ onFetchForecast, onUseMyLocation }) {
   const cityInputRef = useRef(); //Ref allows for rendering only when the form is submitted, with one value
   const countryInputRef = useRef();
   const [error, setError] = useState();
@@ -79,9 +80,12 @@ export default function SearchForm({ onFetchForecast }) {
             ref={countryInputRef}
           />
           <button type="submit">
-            <img src={searchIcon} alt="search icon" />
+            <img src={searchIcon} alt="search" />
           </button>
         </form>
+        <button onClick={onUseMyLocation}>
+          <img src={locationIcon} alt="Use my location" />
+        </button>
       </Card>
     </React.Fragment>
   );

@@ -6,10 +6,11 @@ export default function ForecastListItem({
   icon,
   max,
   min,
+  day,
 }) {
   return (
     <div className={styles.forecastListItem}>
-      <h3>{date.substring(5, 10)}</h3>
+      <h3>{day}</h3>
       <img
         alt="weather-icon"
         src={`http://openweathermap.org/img/wn/${icon}@2x.png`}

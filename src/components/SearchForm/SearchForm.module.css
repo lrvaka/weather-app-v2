@@ -3,6 +3,8 @@
   padding: 20px;
   width: 90%;
   max-width: 500px;
+  display: flex;
+  flex-direction: column;
 }
 
 .searchForm {
@@ -40,11 +42,43 @@
 .searchForm img {
   filter: invert(100%);
   width: 20px;
- 
+
   transition: all 0.2s ease-in-out;
 }
 
 .searchForm img:hover {
-    transform: scale(1.1);
-    transform: scaleX(-1);
-  }
+  transform: scale(1.1);
+  transform: scaleX(-1);
+}
+
+button {
+  align-self: center;
+  min-height: 50px;
+  min-width: 50px;
+  width: 50px;
+  border-radius: 12px;
+  background-color: rgb(189, 121, 121);
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  border: 1px solid rgb(0, 0, 0, 0.3);
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+button img {
+  filter: invert(100%);
+  width: 20px;
+
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+button img:hover {
+  transform: scale(1.1);
+  transform: scaleX(-1);
+}
+
+
