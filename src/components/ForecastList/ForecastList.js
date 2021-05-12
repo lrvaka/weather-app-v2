@@ -12,7 +12,7 @@ export default function ForecastList({ forecastInfo, todaysForecast }) {
     <Card className={styles.container}>
       <div className={styles.location}>
         <h1>
-          {city ? city + ", " : "Enter a location"}
+          {city ? city + ", " : "Enter a location or use your geo-location"}
           {country ? country : null}
         </h1>
       </div>
