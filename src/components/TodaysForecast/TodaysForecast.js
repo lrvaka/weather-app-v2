@@ -21,9 +21,9 @@ export default function TodaysForecast({
           src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
         ></img>
         <h5>{description}</h5>
+        <h5>{temp}F</h5>
       </section>
       <section className={styles.rightSection}>
-        <h5>Temp: {temp}F</h5>
         <h5>Feels Like: {feelsLike}F</h5>
         <h5>Hi: {max}F</h5>
         <h5>Lo: {min}F</h5>
