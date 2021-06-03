@@ -1,10 +1,13 @@
 # Weather App using OpenWeatherAPI
 
-This project was created using React, weather information extracted from the OpenWeatherAPI
+This project was created using React - weather information extracted from the [OpenWeatherAPI](https://openweathermap.org/api)
 
 ## Features
 
-- 4 day forecast
-- Search by city & country
-- Geo-location enabled
-- Form validation
+ - 5-day forecast
+ - Today's Weather
+ - Search by city & country
+ - Search by geo-location
+ - Hi-Temp, Low-Temp, feels-like & humidity information
+ - Weather icons & description
+ - Form validation
