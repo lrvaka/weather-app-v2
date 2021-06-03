@@ -14,7 +14,7 @@ export default function ForecastListItem({
       <h3>{day}</h3>
       <img
         alt="weather-icon"
-        src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+        src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
       ></img>
       <h5>{description}</h5>
       <h3>{max}</h3>
