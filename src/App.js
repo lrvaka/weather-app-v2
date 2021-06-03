@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { React, useState } from "react";
 import styles from "./App.module.css";
 import Card from "./UI/Card/Card";
 import SearchForm from "./components/SearchForm/SearchForm";
@@ -10,7 +10,6 @@ function App() {
 
   const useMyLocationHandler = () => {
     if (navigator.geolocation) {
-      console.log(navigator.geolocation);
       navigator.geolocation.getCurrentPosition(showPosition);
     } else {
       setForecastInfo("Geolocation is not supported by this browser.");
@@ -35,7 +34,6 @@ function App() {
       }
       let dataToday = await responseToday.json();
 
-      console.log(dataToday);
 
       let filteredWeather = data.list.map((e) => {
         return {
@@ -129,15 +127,13 @@ function App() {
   async function fetchForecastHandler(e) {
 
     let responseToday = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${e.city},${e.country}&units=imperial&appid=2c3448653d26657e8f7d970848003330`
+      `https://api.openweathermap.org/data/2.5/weather?q=${e.city},${e.country}&units=imperial&appid=${process.env.REACT_APP_SECRET_KEY}`
     );
     if (!responseToday.ok) {
       //Location not found function here, probably gonna pass to a modal inside ForecastList component
       return;
     }
     let dataToday = await responseToday.json();
-
-    console.log(dataToday);
 
     let dayName = new Date();
     dayName.setDate(dayName.getDate());
@@ -160,15 +156,13 @@ function App() {
     });
 
     let response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${e.city},${e.country}&units=imperial&appid=2c3448653d26657e8f7d970848003330`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${e.city},${e.country}&units=imperial&appid=${process.env.REACT_APP_SECRET_KEY}`
     );
     if (!response.ok) {
       //Location not found function here, probably gonna pass to a modal inside ForecastList component
       return;
     }
     let data = await response.json();
-
-    console.log(data);
 
     let filteredWeather = data.list.map((e) => {
       return {
@@ -235,7 +229,7 @@ function App() {
 
     setForecastInfo(filteredFinal);
 
-    console.log(forecastInfo);
+  
   }
   return (
     <div className={styles.app}>

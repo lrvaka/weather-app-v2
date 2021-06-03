@@ -1,5 +1,6 @@
 import Card from "../Card/Card";
 import styles from "./ErrorModal.module.css";
+import { React } from "react";
 
 export default function ErrorModal({onConfirm, title, message}) {
   return (

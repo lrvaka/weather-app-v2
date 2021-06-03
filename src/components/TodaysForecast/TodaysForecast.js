@@ -1,5 +1,6 @@
 import styles from "./TodaysForecast.module.css";
 import Card from "../../UI/Card/Card";
+import { React } from "react";
 
 export default function TodaysForecast({
   date,
