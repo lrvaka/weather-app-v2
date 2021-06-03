@@ -19,7 +19,7 @@ export default function TodaysForecast({
         <h3>Today</h3>
         <img
           alt="weather-icon"
-          src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+          src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
         ></img>
         <h5>{description}</h5>
         <h5>{temp}F</h5>
