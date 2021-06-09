@@ -2,6 +2,8 @@
 
 This project was created using React - weather information extracted from the [OpenWeatherAPI](https://openweathermap.org/api)
 
+[Demo](https://weather-forecast-app679.netlify.app/)
+
 ## Features
 
  - 5-day forecast
